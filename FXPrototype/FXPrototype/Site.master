@@ -1,12 +1,22 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
 
 <!DOCTYPE html>
-
+<style>
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 40px;
+        padding-top:5px;
+        background-color: #222222;
+        color: #777777;
+    }
+</style>
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %></title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -46,12 +56,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
+                    <a class="navbar-brand" runat="server" href="~/De_dust">Xen Market</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/De_dust">Home</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
+                        <li><a runat="server" href="~/RatesPage">Rates</a></li>
+                        <li><a runat="server">My Purchases</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
@@ -77,10 +89,12 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
-            </footer>
         </div>
     </form>
+    <footer>
+        <div class="container body-content">
+            <p>&copy; <%: DateTime.Now.Year %> - SoundFX Prototype</p>
+        </div>
+    </footer>
 </body>
 </html>

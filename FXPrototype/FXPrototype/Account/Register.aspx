@@ -15,7 +15,7 @@
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="UserName" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName"
-                    CssClass="text-danger" ErrorMessage="The user name field is required." />
+                    CssClass="text-danger" Display="Dynamic" ErrorMessage="The user name field is required." />
             </div>
         </div>
         <div class="form-group">
@@ -23,7 +23,7 @@
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Password"
-                    CssClass="text-danger" ErrorMessage="The password field is required." />
+                    CssClass="text-danger" Display="Dynamic" ErrorMessage="The password field is required." />
             </div>
         </div>
         <div class="form-group">
@@ -37,10 +37,29 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <asp:Button runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="btn btn-default" />
+            <asp:Label runat="server" AssociatedControlID="FirstName" CssClass="col-md-2 control-label">First Name</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="FirstName" CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="FirstName"
+                    CssClass="text-danger" Display="Dynamic" ErrorMessage="Please enter a first name." />
             </div>
         </div>
+        <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="LastName" CssClass="col-md-2 control-label">Last Name</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="LastName" CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="LastName"
+                    CssClass="text-danger" Display="Dynamic" ErrorMessage="Please enter a last name." />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <asp:Button runat="server" OnClick="NewUser_Click" Text="Register" CssClass="btn btn-default" />
+            </div>
+        </div>
+            <div class="col-md-offset-2 col-md-10">
+                <asp:Button runat="server" OnClick="Test_Click" Text="Test" CssClass="btn btn-default" />
+            </div>
     </div>
 </asp:Content>
 

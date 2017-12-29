@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
-using FXPrototype;
+using WebSite1;
 
 public partial class OpenAuthProviders : System.Web.UI.UserControl
 {

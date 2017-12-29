@@ -1,5 +1,5 @@
 ﻿<%@ Application Language="C#" %>
-<%@ Import Namespace="FXPrototype" %>
+<%@ Import Namespace="WebSite1" %>
 <%@ Import Namespace="System.Web.Optimization" %>
 <%@ Import Namespace="System.Web.Routing" %>
 
@@ -10,5 +10,10 @@
         RouteConfig.RegisterRoutes(RouteTable.Routes);
         BundleConfig.RegisterBundles(BundleTable.Bundles);
     }
+    protected void Session_Start(object sender, EventArgs e)
+    {
+        Session["sid"] = Session.SessionID;
+        Session["sid"] = "Test";
+    } 
 
 </script>
