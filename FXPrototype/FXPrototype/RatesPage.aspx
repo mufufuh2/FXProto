@@ -17,22 +17,21 @@
         .warning{
             color: red;
         }
+
     </style>
     <h2>Check our available Rates here</h2>
     <h5>Our rates are calculated against IDR only (for now...)</h5>
     <hr />
     <div class ="form-horizontal">
         <h4>Please select a rate</h4>
-            <asp:DropDownList ID="RatesList" runat="server" OnSelectedIndexChanged="RatesList_SelectedIndexChanged" AutoPostBack="True">
+            <asp:DropDownList ID="RatesList" runat="server" OnSelectedIndexChanged="RatesList_SelectedIndexChanged" AutoPostBack="true">
                 <asp:ListItem>Rates</asp:ListItem>
             </asp:DropDownList>
         <div class="form-group">
-            <div class ="col-md-offset-2 col-md-10">
-                <asp:Button runat="server" OnClick="ValidateSelect_Click" Text="Check Rates" CssClass="btn btn-default" />
-            </div>
             <asp:Label runat="server" ID="SelectRate" CssClass="col-md-2 control-label warning"></asp:Label>
         </div>
-
     </div>
+    <asp:Table ID="RatesTable" runat="server" CssClass="table table-hover table-bordered">
+    </asp:Table>
 </asp:Content>
 
