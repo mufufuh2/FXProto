@@ -28,7 +28,7 @@
             color: white;
         }
     </style>
-    <h2>Check our available Rates here</h2>
+    <h2>Check our available rates here</h2>
     <h5>Our rates are calculated against IDR only (for now...)</h5>
     <hr />
     <div class="row">
