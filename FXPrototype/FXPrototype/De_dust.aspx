@@ -26,12 +26,12 @@
         <div class="col-md-4">
             <h3>Discover our rates</h3>
             <p>We pool rates from all our partners to provide you with the best</p>
-            <a class="btn btn-default" runat="server" href="~/" >Learn more &raquo;</a>
+            <a class="btn btn-default" runat="server" href="~/RatesPage.aspx" >Learn more &raquo;</a>
         </div>
         <div class="col-md-4">
             <h3>Become a Partner</h3>
             <p>Join our growing list of partner vendors and reach out to a wider audience</p>
-            <a class="btn btn-default" runat="server" href="~/TestPage.aspx">Learn more &raquo;</a>
+            <a class="btn btn-default" runat="server" href="~/CompanyRate.aspx">Learn more &raquo;</a>
         </div>
     </div>
 

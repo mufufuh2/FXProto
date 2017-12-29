@@ -52,37 +52,6 @@ public partial class RatesPage : System.Web.UI.Page
 
     }
 
-    /*
-            <div class ="col-md-offset-2 col-md-10">
-                <asp:Button runat="server" OnClick="ValidateSelect_Click" Text="Check Rates" CssClass="btn btn-default" />
-            </div>
-    protected void ValidateSelect_Click(object sender, EventArgs e)
-    {
-        // Learn how to do Custom Validation for the real product
-        // http://www.adamtibi.net/09-2008/the-three-steps-of-building-an-asp-net-validator-control
-        // https://msdn.microsoft.com/en-us/library/bwd43d0x.aspx
-        // https://msdn.microsoft.com/en-us/library/7kh55542.aspx
-        selection = RatesList.SelectedItem.ToString();
-        /*
-        if (RatesList.SelectedItem.ToString() == "Rates")
-        {
-            //SelectRate.Text = "Please select a valid rate";
-            this.valid = false;
-            if (valid == false)
-            {
-                SelectRate.Text = "Please select a valid rate";
-            }
-        }
-        /*
-        else
-        {
-            // Reset the label for the next button press
-            SelectRate.Text = "";
-        }
-
-    }
-    */
-
     protected void RatesList_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (RatesList.SelectedItem.ToString() == "Rates")
@@ -123,7 +92,7 @@ public partial class RatesPage : System.Web.UI.Page
                 "LEFT JOIN Quantity ON Company.CompanyID = Quantity.CompanyID AND cc.CurrencyID = Quantity.CurrencyID " +
                 "WHERE cc.CurrencyCode = '" + selection[0] + "' " +
                 "ORDER BY cc.CurrencyID ASC, Company.CompanyID ASC;";
-            //System.Diagnostics.Debug.WriteLine(sqlSelect);
+
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = con;
             cmd.CommandText = sqlSelect;
@@ -151,5 +120,20 @@ public partial class RatesPage : System.Web.UI.Page
             System.Diagnostics.Debug.WriteLine(ex.ToString());
         }
     }
-    
+
+    protected void AmountSelect_Click(object sender, EventArgs e)
+    {
+        // Learn how to do Custom Validation for the real product
+        // http://www.adamtibi.net/09-2008/the-three-steps-of-building-an-asp-net-validator-control
+        // https://msdn.microsoft.com/en-us/library/bwd43d0x.aspx
+        // https://msdn.microsoft.com/en-us/library/7kh55542.aspx
+        
+        if (RatesList.SelectedItem.ToString() == "Rates")
+        {
+            SelectRate.Text = "Please select a valid rate";
+            return;
+        }
+        
+    }
+
 }
