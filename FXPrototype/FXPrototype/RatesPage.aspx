@@ -52,7 +52,7 @@
         <div class ="col-sm-4">
             <br />
             <div class="form-group buttontext">
-                <asp:Button runat="server" OnClick="AmountSelect_Click" Text="Purchase" CssClass="btn btn-default" />
+                <asp:Button runat="server" OnClick="AmountSelect_Click" Text="Get a Quote" CssClass="btn btn-default" />
             </div>
         </div>
     </div>

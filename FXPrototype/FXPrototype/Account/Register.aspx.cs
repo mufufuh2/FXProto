@@ -32,7 +32,7 @@ public partial class Account_Register : Page
         MySqlConnection con = new MySqlConnection(conStr);
         try
         {
-            System.Diagnostics.Debug.WriteLine("Connecting to MySQL");
+            //System.Diagnostics.Debug.WriteLine("Connecting to MySQL");
             con.Open();
 
             string sqlSelect = "SELECT * FROM Account";
@@ -64,7 +64,7 @@ public partial class Account_Register : Page
         MySqlTransaction tr = null;
         try
         {
-            System.Diagnostics.Debug.WriteLine("Connecting to MySQL");
+            //System.Diagnostics.Debug.WriteLine("Connecting to MySQL");
             con.Open();
             tr = con.BeginTransaction();
 

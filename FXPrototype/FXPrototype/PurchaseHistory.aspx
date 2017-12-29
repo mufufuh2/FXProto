@@ -5,7 +5,8 @@
 
     </style>
     <h2>Check your purchase history</h2>
-
+    <h5>Each purchase comes from several vendors</h5>
+    <hr />
     <div class="row">
         
     </div>

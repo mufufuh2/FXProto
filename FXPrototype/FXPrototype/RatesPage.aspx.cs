@@ -16,8 +16,6 @@ public partial class RatesPage : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         MySqlConnection con = new MySqlConnection(conStr);
-        //RatesList.Items.Clear();
-        //RatesList.Items.Add("Rates");
         
         if (RatesList.Items.Count <= 1)
         {
@@ -82,7 +80,7 @@ public partial class RatesPage : System.Web.UI.Page
         RatesTable.Rows.Add(th);
         try
         {
-            System.Diagnostics.Debug.WriteLine("Connecting to MySQL");
+            //System.Diagnostics.Debug.WriteLine("Connecting to MySQL");
             con.Open();
 
             string sqlSelect = 
@@ -91,7 +89,16 @@ public partial class RatesPage : System.Web.UI.Page
                 "LEFT JOIN Currency cc ON sr.CurrencyID = cc.CurrencyID " +
                 "LEFT JOIN Quantity ON Company.CompanyID = Quantity.CompanyID AND cc.CurrencyID = Quantity.CurrencyID " +
                 "WHERE cc.CurrencyCode = '" + selection[0] + "' " +
-                "ORDER BY cc.CurrencyID ASC, Company.CompanyID ASC;";
+                "ORDER BY Rate ASC, Quantity DESC;";
+
+            /*
+            Considerations for ordering the priority of company selections
+            - Lowest Rates
+            - Amount Available
+            - Location/Address (Lat,Lon)
+            - Company Ratings
+            All of these encompass risk and cost of the total package
+            */
 
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = con;
