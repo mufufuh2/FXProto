@@ -68,10 +68,11 @@ public partial class Account_Register : Page
             con.Open();
             tr = con.BeginTransaction();
 
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = con;
-            cmd.Transaction = tr;
-
+            MySqlCommand cmd = new MySqlCommand()
+            {
+                Connection = con,
+                Transaction = tr
+            };
             string sqlInsertUser = "INSERT INTO `Account`(Username,Password,FirstName,LastName,CompanyID) VALUES (";
             sqlInsertUser += "'"+UserName.Text + "', ";
             sqlInsertUser += "'"+Password.Text + "', ";

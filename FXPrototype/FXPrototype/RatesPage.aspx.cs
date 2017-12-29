@@ -14,33 +14,6 @@ public partial class RatesPage : System.Web.UI.Page
     string conStr = System.Configuration.ConfigurationManager.ConnectionStrings["xenmarketConnection"].ConnectionString;
     string selection;
 
-    protected void ValidateSelect_Click(object sender, EventArgs e)
-    {
-        // Learn how to do Custom Validation for the real product
-        // http://www.adamtibi.net/09-2008/the-three-steps-of-building-an-asp-net-validator-control
-        // https://msdn.microsoft.com/en-us/library/bwd43d0x.aspx
-        // https://msdn.microsoft.com/en-us/library/7kh55542.aspx
-        selection = RatesList.SelectedItem.ToString();
-        /*
-        if (RatesList.SelectedItem.ToString() == "Rates")
-        {
-            //SelectRate.Text = "Please select a valid rate";
-            this.valid = false;
-            if (valid == false)
-            {
-                SelectRate.Text = "Please select a valid rate";
-            }
-        }*/
-        /*
-        else
-        {
-            // Reset the label for the next button press
-            SelectRate.Text = "";
-        }
-        */
-
-    }
-
     protected void Page_Load(object sender, EventArgs e)
     {
         MySqlConnection con = new MySqlConnection(conStr);
@@ -73,6 +46,33 @@ public partial class RatesPage : System.Web.UI.Page
         }
 
         con.Close();
+    }
+
+    protected void ValidateSelect_Click(object sender, EventArgs e)
+    {
+        // Learn how to do Custom Validation for the real product
+        // http://www.adamtibi.net/09-2008/the-three-steps-of-building-an-asp-net-validator-control
+        // https://msdn.microsoft.com/en-us/library/bwd43d0x.aspx
+        // https://msdn.microsoft.com/en-us/library/7kh55542.aspx
+        selection = RatesList.SelectedItem.ToString();
+        /*
+        if (RatesList.SelectedItem.ToString() == "Rates")
+        {
+            //SelectRate.Text = "Please select a valid rate";
+            this.valid = false;
+            if (valid == false)
+            {
+                SelectRate.Text = "Please select a valid rate";
+            }
+        }*/
+        /*
+        else
+        {
+            // Reset the label for the next button press
+            SelectRate.Text = "";
+        }
+        */
+
     }
 
     protected void RatesList_SelectedIndexChanged(object sender, EventArgs e)
