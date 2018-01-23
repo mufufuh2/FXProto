@@ -33,7 +33,7 @@
     <hr />
     <div class="row">
         <div class="col-sm-4">
-        <h4>Please select a rate</h4>
+        <h4>Please select a currency</h4>
         <asp:DropDownList ID="RatesList" runat="server" OnSelectedIndexChanged="RatesList_SelectedIndexChanged" AutoPostBack="true">
             <asp:ListItem>Rates</asp:ListItem>
         </asp:DropDownList> &nbsp;
