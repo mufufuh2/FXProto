@@ -215,6 +215,8 @@ public partial class RatesPage : System.Web.UI.Page
             // Find the average with function here
             double avgRate = AverageRate_Calc(rates, amounts, countVendors);
             // INSERT rates and amounts to database here
+            // Temporary IDR currency ID for use as the base currency
+            int idrCurrencyID = 11;
 
 
             // UPDATE individual vendor quantities here
@@ -263,30 +265,71 @@ public partial class RatesPage : System.Web.UI.Page
 
             // DONE, queried the currency ID in previous SQL statement
             // and passed as parameter in this function
-            int idrCurrencyID = 11;
             // baseCurrency is currently set to IDR's CurrencyID by default
-
-            string sqlInsertPurchase = "INSERT INTO `Purchase` (BuyerID, BaseCurrency, Rate, TradeCurrency, TotalAmount, PurchasedOn) VALUES";
-            string sqlInsertSale = "INSERT INTO `Sale` (SellerID, PurchaseID, BaseCurrency, Rate, TradeCurrency, Amount, PurchasedOn) VALUES";
 
             // Once buyer ID can be passed properly to the page, we will use it here
             // for now buyerID is temporarily set to user 3
             int buyerID = 3;
-            sqlInsertPurchase += "";
+            int total = quantities.Sum();
+            string sqlInsertPurchase = GenerateSQLPurchaseString(buyerID, baseID, average, tradeID, total);
 
-            for (int i = vendorCount; i > 0; i--)
-            {
-                sqlInsertSale += "`";
-            }
+            cmd.CommandText = sqlInsertPurchase;
+
+            cmd.ExecuteNonQuery();
 
 
-            con.Close();
+            //tr.Commit();
         }
         catch (Exception ex)
         {
+            try
+            {
+                tr.Rollback();
+            }
+            catch (MySqlException ex1)
+            {
+                System.Diagnostics.Debug.WriteLine(ex1.ToString());
+            }
             System.Diagnostics.Debug.WriteLine("SQL ERROR");
             System.Diagnostics.Debug.WriteLine(ex.ToString());
         }
+        con.Close();
+    }
+
+    private string GenerateSQLPurchaseString(int buyerID, int baseCurrID, double rate, int tradeCurrID, int quantity)
+    {
+        string sqlInsertPurchase = "INSERT INTO `Purchase` (BuyerID, BaseCurrency, Rate, TradeCurrency, TotalAmount, PurchasedOn) VALUES";
+        sqlInsertPurchase += "(";
+        sqlInsertPurchase += "`" + buyerID + "`,";
+        sqlInsertPurchase += "`" + baseCurrID + "`,";
+        sqlInsertPurchase += "`" + rate + "`,";
+        sqlInsertPurchase += "`" + tradeCurrID + "`,";
+        sqlInsertPurchase += "`" + quantity + "`,";
+        sqlInsertPurchase += "NOW()";
+        sqlInsertPurchase += ");";
+
+        return sqlInsertPurchase;
+    }
+
+    private string GenerateSQLSaleString(int vendorCount)
+    {
+        string sqlInsertSale = "INSERT INTO `Sale` (SellerID, PurchaseID, BaseCurrency, Rate, TradeCurrency, Amount, PurchasedOn) VALUES";
+
+        for (int i = vendorCount; i > 0; i--)
+        {
+            sqlInsertSale += "(";
+            sqlInsertSale += "`";
+            if (i == 1)
+            {
+                sqlInsertSale += ");";
+            }
+            else
+            {
+                sqlInsertSale += ")";
+            }
+        }
+
+        return sqlInsertSale;
     }
 
 }
