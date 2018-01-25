@@ -274,9 +274,26 @@ public partial class RatesPage : System.Web.UI.Page
             string sqlInsertPurchase = GenerateSQLPurchaseString(buyerID, baseID, average, tradeID, total);
 
             cmd.CommandText = sqlInsertPurchase;
-
             cmd.ExecuteNonQuery();
 
+            //Find most recent purchase ID here
+            int purchaseID = 0;
+            string getPurchaseID = "SELECT MAX(PurchaseID) FROM `Purchase`;";
+            MySqlCommand getIDcmd = new MySqlCommand(getPurchaseID, con);
+            object result = getIDcmd.ExecuteScalar();
+            if (result != null)
+            {
+                purchaseID = Convert.ToInt32(result);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Failed to execute Scalar calculation in SQL");
+            }
+
+            string sqlInsertSale = GenerateSQLSaleString(vendorCount, IDs, purchaseID, baseID, rates, tradeID, quantities);
+
+            cmd.CommandText = sqlInsertSale;
+            cmd.ExecuteNonQuery();
 
             //tr.Commit();
         }
@@ -311,22 +328,23 @@ public partial class RatesPage : System.Web.UI.Page
         return sqlInsertPurchase;
     }
 
-    private string GenerateSQLSaleString(int vendorCount)
+    private string GenerateSQLSaleString(int vendorCount, List<int> companyID, int purchaseID, int baseCurrency, List<double> ratesList, int tradeCurrency, List<int> quantities)
     {
         string sqlInsertSale = "INSERT INTO `Sale` (SellerID, PurchaseID, BaseCurrency, Rate, TradeCurrency, Amount, PurchasedOn) VALUES";
 
         for (int i = vendorCount; i > 0; i--)
         {
             sqlInsertSale += "(";
-            sqlInsertSale += "`";
-            if (i == 1)
-            {
-                sqlInsertSale += ");";
-            }
-            else
-            {
-                sqlInsertSale += ")";
-            }
+            sqlInsertSale += "`" + companyID[i] + "`,";
+            sqlInsertSale += "`" + purchaseID + "`,";
+            sqlInsertSale += "`" + baseCurrency + "`,";
+            sqlInsertSale += "`" + ratesList[i] + "`,";
+            sqlInsertSale += "`" + tradeCurrency + "`,";
+            sqlInsertSale += "`" + quantities[i] + "`,";
+            sqlInsertSale += "NOW()";
+
+            if (i == 1) { sqlInsertSale += ");"; }
+            else { sqlInsertSale += "),"; }
         }
 
         return sqlInsertSale;
