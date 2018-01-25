@@ -189,15 +189,15 @@ public partial class RatesPage : System.Web.UI.Page
             int countVendors = 0;
             int currentTotal = 0;
             int intermediate = 0;
-            int currencyID = 0;
-            List<int> CompanyIDs = new List<int>();
+            int tradeID = 0;
+            List<int> vendorIDs = new List<int>();
             List<double> rates = new List<double>();
             List<int> amounts = new List<int>();
 
             while (rdr.Read())
             {
                 countVendors++;
-                CompanyIDs.Add(int.Parse(rdr[0].ToString()));
+                vendorIDs.Add(int.Parse(rdr[0].ToString()));
                 rates.Add(double.Parse(rdr[1].ToString()));
                 intermediate = int.Parse(rdr[2].ToString());
 
@@ -205,20 +205,24 @@ public partial class RatesPage : System.Web.UI.Page
                 {
                     intermediate = purchaseAmount - currentTotal;
                     amounts.Add(intermediate);
-                    currencyID = int.Parse(rdr[3].ToString());
+                    tradeID = int.Parse(rdr[3].ToString());
                     break;
                 }
                 amounts.Add(intermediate);
             }
             con.Close();
 
-            // Find the average with function here
             double avgRate = AverageRate_Calc(rates, amounts, countVendors);
-            // INSERT rates and amounts to database here
+
             // Temporary IDR currency ID for use as the base currency
             int idrCurrencyID = 11;
 
-
+            /* Currently, InsertPurchases is inserting both to purchases and to sale
+             * if necessary or if there is a bug caused by this, it will be split
+             * into individual purchase and sale functions
+             */
+            InsertPurchases(vendorIDs, rates, amounts, avgRate, countVendors, idrCurrencyID, tradeID);
+            // INSERT rates and amounts to database here
             // UPDATE individual vendor quantities here
         }
         catch (Exception ex)
@@ -270,6 +274,7 @@ public partial class RatesPage : System.Web.UI.Page
             // Once buyer ID can be passed properly to the page, we will use it here
             // for now buyerID is temporarily set to user 3
             int buyerID = 3;
+
             int total = quantities.Sum();
             string sqlInsertPurchase = GenerateSQLPurchaseString(buyerID, baseID, average, tradeID, total);
 
