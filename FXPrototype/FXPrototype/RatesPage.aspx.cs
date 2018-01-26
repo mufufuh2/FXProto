@@ -211,6 +211,7 @@ public partial class RatesPage : System.Web.UI.Page
                 }
                 amounts.Add(intermediate);
             }
+            rdr.Close();
             con.Close();
 
             double avgRate = AverageRate_Calc(rates, amounts, countVendors);
@@ -288,6 +289,7 @@ public partial class RatesPage : System.Web.UI.Page
             else
             {
                 System.Diagnostics.Debug.WriteLine("Failed to execute Scalar calculation in SQL");
+                SelectRate.Text = "Purchase failed due to system error";
             }
 
             string sqlInsertSale = GenerateSQLSaleString(vendorCount, IDs, purchaseID, baseID, rates, tradeID, quantities);
@@ -296,6 +298,7 @@ public partial class RatesPage : System.Web.UI.Page
             cmd.ExecuteNonQuery();
 
             tr.Commit();
+            SelectRate.Text = "Purchase has been made";
         }
         catch (Exception ex)
         {

@@ -12,7 +12,7 @@
             <h4>Might add purchase/order status at a later date</h4>
         </div>
         <div class="col-sm-4">
-            <h4>Also better filters such as date/amount/currency</h4>
+            <h4>Also add filters such as date, amount, currency</h4>
         </div>
     </div>
     <br />

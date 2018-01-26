@@ -76,13 +76,13 @@ public partial class PurchaseHistory : System.Web.UI.Page
                 }
                 HistoryTable.Rows.Add(tr);
             }
-
-            con.Close();
+            rdr.Close();
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine("SQL ERROR");
             System.Diagnostics.Debug.WriteLine(ex.ToString());
         }
+        con.Close();
     }
 }

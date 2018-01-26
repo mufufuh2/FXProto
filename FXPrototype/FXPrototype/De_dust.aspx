@@ -33,6 +33,11 @@
             <p>Join our growing list of partner vendors and reach out to a wider audience</p>
             <a class="btn btn-default" runat="server" href="~/CompanyRate.aspx">Learn more &raquo;</a>
         </div>
+        <div class="col-md-4">
+            <h3>Check older purchases</h3>
+            <p>View all your recent purchases in one convenient history page</p>
+            <a class="btn btn-default" runat="server" href="~/PurchaseHistory.aspx">Learn more &raquo;</a>
+        </div>
     </div>
 
 </asp:Content>
