@@ -108,6 +108,7 @@ public partial class RatesPage : System.Web.UI.Page
             MySqlDataReader rdr = cmd.ExecuteReader();
             TableRow tr = new TableRow();
             TableCell td = new TableCell();
+
             while (rdr.Read())
             {
                 tr = new TableRow();
@@ -264,12 +265,6 @@ public partial class RatesPage : System.Web.UI.Page
             };
 
             string[] selection = (RatesList.SelectedItem.ToString()).Split(new[] { " - " }, StringSplitOptions.None);
-            // Find a way to get the CurrencyID from here...
-            // Slightly annoying but you might need to do another query here
-
-            // DONE, queried the currency ID in previous SQL statement
-            // and passed as parameter in this function
-            // baseCurrency is currently set to IDR's CurrencyID by default
 
             // Once buyer ID can be passed properly to the page, we will use it here
             // for now buyerID is temporarily set to user 3
@@ -300,7 +295,7 @@ public partial class RatesPage : System.Web.UI.Page
             cmd.CommandText = sqlInsertSale;
             cmd.ExecuteNonQuery();
 
-            //tr.Commit();
+            tr.Commit();
         }
         catch (Exception ex)
         {
